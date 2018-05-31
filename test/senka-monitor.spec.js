@@ -103,5 +103,15 @@ describe("SenkaMonitor", () => {
             );
             expect(SenkaMonitor.getPrevDayCutoffExp()).to.equal(597402);
         });
+
+        it('should reset the daily rank pts array', () => {
+            SenkaMonitor.setNextDayCutoffTime(Date.UTC(2018, 4, 31, 13));
+            SenkaMonitor.setCurrentTime(Date.UTC(2018, 4, 31, 13, 24));
+
+            SenkaMonitor.checkMonthCutoff();
+            expect(SenkaMonitor.getRankPtsGainPerDay()).to.deep.equal(
+                Array(30).fill(0)
+            );
+        });
     });
 });

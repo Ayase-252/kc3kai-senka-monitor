@@ -110,7 +110,8 @@ const SenkaMonitor = {
         if (this.currentTime > this.timeNextMonthCutoff) {
             this.expPrevMonthCutoff = this.expCurrent;
             this.timeNextMonthCutoff = this.getNextMonthCutoffTime();
-            this.rankPtsGainPerDay = Array(this._getMonthLastDay()).fill(0);
+            this.rankPtsGainPerDay = Array(
+                this._getTotalDaysDuringOperation()).fill(0);
 
             this.expPrevDayCutoff = this.expCurrent;
             this.timeNextDayCutoff = this.getNextDayCutoffTime();
@@ -119,10 +120,18 @@ const SenkaMonitor = {
 
     _getMonthLastDay: function () {
         // UTC+9, now UTC of jstNow is the JST
-        const utcNow = new Date(this.currentTime);
+        const utcNow = this.currentTime;
         const jstNow = new Date(utcNow + 9 * 3600000);
         const lastDay = new Date(Date.UTC(jstNow.getUTCFullYear(),
             jstNow.getUTCMonth() + 1, 0)).getUTCDate();
+        return lastDay;
+    },
+
+    _getTotalDaysDuringOperation: function () {
+        const utcNow = this.currentTime;
+        const offsetTime = new Date(utcNow + 11 * 3600000);
+        const lastDay = new Date(Date.UTC(offsetTime.getUTCFullYear(),
+            offsetTime.getUTCMonth() + 1, 0)).getUTCDate();
         return lastDay;
     },
 
