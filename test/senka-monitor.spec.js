@@ -35,6 +35,10 @@ describe("SenkaMonitor", () => {
                 expect(SenkaMonitor.getNextDayCutoffTime()).to.equal(
                     Date.UTC(2018, 1, 28, 13)
                 );
+                SenkaMonitor.setCurrentTime(Date.UTC(2018, 4, 31, 13, 12));
+                expect(SenkaMonitor.getNextDayCutoffTime()).to.equal(
+                    Date.UTC(2018, 5, 1, 17)
+                );
             });
         });
 
