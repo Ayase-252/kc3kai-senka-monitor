@@ -46,7 +46,7 @@ const SenkaMonitor = {
         let cutoffHour = 17;
         if (now.getUTCHours() >= 17 ||
             (now.getUTCDate() === this._getMonthLastDay() &&
-                now.getUTCHours() > 13)) {
+                now.getUTCHours() >= 13)) {
             nextDay += 1;
         }
         if (nextDay === this._getMonthLastDay()) {
