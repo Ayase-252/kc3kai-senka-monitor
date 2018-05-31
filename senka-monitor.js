@@ -163,6 +163,15 @@ const SenkaMonitor = {
     
     getCurrentExp() {
         return this.expCurrent;   
+    },
+
+    fixData() {
+        // Fix wrong rank pts array
+        const newSize = this._getTotalDaysDuringOperation();
+        while(newSize > this.rankPtsGainPerDay.length) {
+            this.rankPtsGainPerDay.length.push(0);
+        }
+        this.rankPtsGainPerDay.length = newSize;
     }
 };
 
